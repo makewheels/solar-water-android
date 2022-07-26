@@ -40,37 +40,36 @@ public class MainActivity extends AppCompatActivity {
         String baseUrl = "http://101.42.94.17:5032/connect?timeLength=";
         c_stop.setOnClickListener(view -> new Thread(() -> {
             HttpUtil.get(baseUrl + 0);
-            Toast.makeText(this, "0", Toast.LENGTH_SHORT).show();
+            runOnUiThread(() -> Toast.makeText(this, "Stop", Toast.LENGTH_SHORT).show());
         }).start());
         c_test.setOnClickListener(view -> new Thread(() -> {
             HttpUtil.get(baseUrl + 1500);
-            Toast.makeText(this, "1.5秒", Toast.LENGTH_SHORT).show();
+            runOnUiThread(() -> Toast.makeText(this, "1.5秒", Toast.LENGTH_SHORT).show());
         }).start());
         c_10s.setOnClickListener(view -> new Thread(() -> {
             HttpUtil.get(baseUrl + 10000);
-            Toast.makeText(this, "10秒", Toast.LENGTH_SHORT).show();
+            runOnUiThread(() -> Toast.makeText(this, "10秒", Toast.LENGTH_SHORT).show());
         }
         ).start());
         c_15s.setOnClickListener(view -> new Thread(() -> {
             HttpUtil.get(baseUrl + 15000);
-            Toast.makeText(this, "15秒", Toast.LENGTH_SHORT).show();
+            runOnUiThread(() -> Toast.makeText(this, "15秒", Toast.LENGTH_SHORT).show());
         }).start());
         c_1m.setOnClickListener(view -> new Thread(() -> {
             HttpUtil.get(baseUrl + 60000);
-            Toast.makeText(this, "1分钟", Toast.LENGTH_SHORT).show();
+            runOnUiThread(() -> Toast.makeText(this, "1分钟", Toast.LENGTH_SHORT).show());
         }).start());
         c_5m.setOnClickListener(view -> new Thread(() -> {
             HttpUtil.get(baseUrl + 300000);
-            Toast.makeText(this, "5分钟", Toast.LENGTH_SHORT).show();
+            runOnUiThread(() -> Toast.makeText(this, "5分钟", Toast.LENGTH_SHORT).show());
         }).start());
         c_10m.setOnClickListener(view -> new Thread(() -> {
             HttpUtil.get(baseUrl + 600000);
-            Toast.makeText(this, "10分钟", Toast.LENGTH_SHORT).show();
+            runOnUiThread(() -> Toast.makeText(this, "10分钟", Toast.LENGTH_SHORT).show());
         }).start());
         c_15m.setOnClickListener(view -> new Thread(() -> {
             HttpUtil.get(baseUrl + 900000);
-            Toast.makeText(this, "15分钟", Toast.LENGTH_SHORT).show();
-
+            runOnUiThread(() -> Toast.makeText(this, "15分钟", Toast.LENGTH_SHORT).show());
         }).start());
     }
 }
