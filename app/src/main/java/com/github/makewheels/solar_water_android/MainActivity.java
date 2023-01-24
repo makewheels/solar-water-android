@@ -1,6 +1,7 @@
 package com.github.makewheels.solar_water_android;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -33,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
         tv_device_status = findViewById(R.id.tv_device_status);
         tv_timestamp = findViewById(R.id.tv_timestamp);
 
+        c_stop = findViewById(R.id.c_stop);
         c_test = findViewById(R.id.c_test);
         c_10s = findViewById(R.id.c_10s);
         c_15s = findViewById(R.id.c_15s);
@@ -41,7 +43,11 @@ public class MainActivity extends AppCompatActivity {
         c_10m = findViewById(R.id.c_10m);
         c_15m = findViewById(R.id.c_15m);
         addClickListeners();
+    }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
         loadDeviceStatus();
     }
 
@@ -85,12 +91,12 @@ public class MainActivity extends AppCompatActivity {
     private void loadDeviceStatus() {
         String url = "https://http-gee-status-solar-uucjvfcrmw.cn-beijing.fcapp.run";
         new Thread(() -> {
-
-            JSONObject jsonObject = JSONObject.parseObject(HttpUtil.get(url));
+            JSONObject data = JSONObject.parseObject(HttpUtil.get(url)).getJSONObject("data");
+            Log.e("tag", "获取设备在线状态返回：" + data.toJSONString());
             runOnUiThread(() -> {
-                tv_device_status.setText("在线状态：" + jsonObject.getString("deviceStatus"));
-                tv_timestamp.setText("最后在线时间："+ jsonObject.getString("timestampString"));
+                tv_device_status.setText("在线状态：" + data.getString("deviceStatus"));
+                tv_timestamp.setText("最后在线时间：" + data.getString("timestampString"));
             });
-        });
+        }).start();
     }
 }
