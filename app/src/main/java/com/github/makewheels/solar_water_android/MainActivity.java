@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void addClickListeners() {
-        String baseUrl = "http://101.42.94.17:5032/connect?timeLength=";
+        String baseUrl = "https://http-solar-ibtoyhpgjm.cn-beijing.fcapp.run?connectTimeLengthInSeconds=";
         c_stop.setOnClickListener(view -> new Thread(() -> {
             HttpUtil.get(baseUrl + 0);
             runOnUiThread(() -> Toast.makeText(this, "Stop", Toast.LENGTH_SHORT).show());
