@@ -7,6 +7,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 
 import com.alibaba.fastjson2.JSONObject;
 
@@ -30,6 +31,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
 
         tv_device_status = findViewById(R.id.tv_device_status);
         tv_timestamp = findViewById(R.id.tv_timestamp);
@@ -94,8 +97,8 @@ public class MainActivity extends AppCompatActivity {
             JSONObject data = JSONObject.parseObject(HttpUtil.get(url)).getJSONObject("data");
             Log.e("tag", "获取设备在线状态返回：" + data.toJSONString());
             runOnUiThread(() -> {
-                tv_device_status.setText("在线状态：" + data.getString("deviceStatus"));
-                tv_timestamp.setText("最后在线时间：" + data.getString("timestampString"));
+                tv_device_status.setText("当前状态：" + data.getString("deviceStatus"));
+                tv_timestamp.setText("最后上线时间：" + data.getString("timestampString"));
             });
         }).start();
     }
